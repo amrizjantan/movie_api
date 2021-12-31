@@ -52,3 +52,9 @@ Timestamp: Wed Dec 22 2021 23:32:14 GMT+0100 (Mitteleuropäische Normalzeit)
 URL: /favicon.ico
 Timestamp: Wed Dec 22 2021 23:32:14 GMT+0100 (Mitteleuropäische Normalzeit)
 
+URL: /
+Timestamp: Thu Dec 23 2021 00:41:10 GMT+0100 (Mitteleuropäische Normalzeit)
+
+URL: /favicon.ico
+Timestamp: Thu Dec 23 2021 00:41:10 GMT+0100 (Mitteleuropäische Normalzeit)
+

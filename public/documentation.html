@@ -13,6 +13,108 @@
         movies, directors, and genres. Users will be able to sign up, update their
         personal information, and create a list of their favorite movies.
     </p>
+    <table>
+        <tr>
+            <th>REQUEST</th>
+            <th>URL</th>
+            <th>HTTP METHOD</th>
+            <th>RESPONSE</th>
+            <th>EXAMPLES</th>
+        </tr>
+        <tr>
+            <td>Get a list of movies</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>Returns a JSON list of movies.</td>
+            <td>Blade, The Matrix, The Shawshank Redemption'</td>
+        </tr>
+        <tr>
+            <td>Get data about a movie from title</td>
+            <td>/movies/:title</td>
+            <td>GET</td>
+            <td>Returns a JSON data about a specific movie.</td>
+            <td>Genre: Sci Fi <br>
+            Name: Blade<br>
+            Description: Sci-Fi is a genre of film that is not real. <br>
+            Director: Alien themself<br>
+            Name: XYZ <br>
+            Bio: XYZ  was born in galaxy....<br>
+            Birth: unknown<br>
+            Actors: [many many]<br>
+            ID: 83748297ß5u3nröi31zuf8931<br>
+            </td>
+        </tr>
+        <tr>
+            <td>Get data about a director</td>
+            <td>/directors/:name</td>
+            <td>GET</td>
+            <td>Returns a JSON data about director.</td>
+            <td>Director: Alien themself<br>
+                Name: XYZ <br>
+                Bio: XYZ  was born in galaxy....<br>
+                </td>
+        </tr>
+        <tr>
+            <td>Add new user</td>
+            <td>/users</td> 
+            <td>POST</td>
+            <td>Will add new user to JSON object.</td>
+            <td>userName: xxxxx, <br>
+            password: xxxxxx, <br>
+            email: xxxxxx, <br>
+            Birthday: xx.xx.xxxx</td>
+        </tr>
+        <tr>
+            <td>Add new movie to list of favorite</td>
+            <td>/users/:username/movies/:movieID</td>
+            <td>POST</td>
+            <td>Returns a text confirming which movie was added successfully.</td>
+            <td>A text message indicating the title of the movie that was added</td>
+        </tr>
+        <tr>
+            <td>Allow users to update their user information</td>
+            <td>/users/:username</td>
+            <td>PUT</td>
+            <td>Returns the data fields that was updated by the user.</td>
+            <td>userName: NewName, <br>
+            password: Newpassword, <br>
+            email: New email, <br>
+            Birthday: New birthday</td>
+        </tr>
+        <tr>
+            <td>Delete the user</td>
+            <td>/users/:username</td>
+            <td>DELETE</td>
+            <td>Return a text confirming that the user was deleted.</td>
+            <td> Enter usersName</td>
+        </tr>
+        
+        <tr>
+            <td>Delete movie from list of favorite</td>
+            <td>/users/:username/movies/:movieID</td>
+            <td>DELETE</td>
+            <td>Returns a text confirming which movie was removed successfully.</td>
+            <td>A text message indicating the title of the movie that was deleted</td>
+        </tr>
+    </table>
+
+    <style>
+        
+    table,td,th
+    {
+     border: 2px solid hsl(271, 95%, 14%);
+     border-collapse: collapse;
+     padding: 5px;
+    }
+    tbody 
+    {
+        text-align: center;
+    }
+    body {
+    font-family: 'Goldman', sans-serif; 
+   }
+
+    </style>
     
 </body>
 </html>

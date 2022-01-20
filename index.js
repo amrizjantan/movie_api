@@ -87,16 +87,42 @@ app.get('/users/:Username', (req, res) => {
 });
 
 // Get JSON genre specific NOT OK YET
-app.get('/genre/:Name', (req, res) => {
-  Genres.findOne({ Name: req.params.Name })
-    .then((genre) => {
-      res.json(genre.Description);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
+//app.get('/genres/:Genre', (req, res) => {
+  //Movies.findOne({ "Genre.Name": req.params.Name })
+    //.then((movie) => {
+      //res.json(movie.Genre);
+    //})
+    //.catch((err) => {
+      //console.error(err);
+      //res.status(500).send('Error: ' + err);
+    //});
+//});
+
+// GET data about a genre (description) by name/title 
+app.get("/genres/:genre",(req, res) => {
+    Movies.findOne({ "Genre.Name": req.params.genre })
+      .then((movie) => {
+        res.json(movie.Genre);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  });
+
+  // GET data about a director (bio, birth year, death year) by name
+app.get(
+  "/director/:directorName",(req, res) => {
+    Movies.findOne({ "Director.Name": req.params.directorName })
+      .then((movie) => {
+        res.json(movie.Director);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 
 // App POST new User

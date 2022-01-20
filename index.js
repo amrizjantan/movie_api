@@ -86,17 +86,6 @@ app.get('/users/:Username', (req, res) => {
     });
 });
 
-// Get JSON genre specific NOT OK YET
-//app.get('/genres/:Genre', (req, res) => {
-  //Movies.findOne({ "Genre.Name": req.params.Name })
-    //.then((movie) => {
-      //res.json(movie.Genre);
-    //})
-    //.catch((err) => {
-      //console.error(err);
-      //res.status(500).send('Error: ' + err);
-    //});
-//});
 
 // GET data about a genre (description) by name/title 
 app.get("/genres/:genre",(req, res) => {
@@ -152,7 +141,7 @@ app.post('/users', (req, res) => {
     });
 });
 
-// App PUT update User NOT OK YET
+// App PUT update user by Username
 app.put('/users/:Username', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
@@ -173,31 +162,27 @@ app.put('/users/:Username', (req, res) => {
   });
 });
 
-//App PUT update a Movie
-app.put('/movie/:Title', (req, res) => {
-  Users.findOneAndUpdate({ Title: req.params.Title }, { $set:
-    {
-      Title: req.body.Title,
-      Description: req.body.Description,
-      Genre: req.body.Genre,
-      Director: req.body.Director
-    }
-  },
-  { new: true }, // This line makes sure that the updated document is returned
-  (err, updatedMovie) => {
-    if(err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    } else {
-      res.json(updatedMovie);
-    }
-  });
-});
 
 // Add a movie to a user's list of favorites
 app.post('/users/:Username/movies/:MovieID', (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
+   },
+   { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
+
+// DELETE a movie from a user's list of favorites
+app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+     $pull: { FavoriteMovies: req.params.MovieID }
    },
    { new: true }, // This line makes sure that the updated document is returned
   (err, updatedUser) => {
@@ -227,8 +212,6 @@ app.delete('/users/:Username', (req, res) => {
     });
 });
 
-
-  
 
   // static
 app.use(express.static('public'));

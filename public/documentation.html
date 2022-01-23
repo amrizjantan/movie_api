@@ -26,19 +26,29 @@
             <td>/movies</td>
             <td>GET</td>
             <td>Returns a JSON list of movies.</td>
-            <td>Blade, The Matrix, The Shawshank Redemption</td>
+            <td>localhost:8080/movies</td>
+        </tr>
+        <tr>
+            <td>Get a list of users</td>
+            <td>/users</td>
+            <td>GET</td>
+            <td>Returns a JSON list of users.</td>
+            <td>localhost:8080/users</td>
         </tr>
         <tr>
             <td>Get data about a movie from title</td>
             <td>/movies/:Title</td>
             <td>GET</td>
             <td>Returns a JSON data about a specific movie.</td>
-            <td>Genre: Sci Fi <br>
-            Name: Blade<br>
-            Description: Sci-Fi is a genre of film that is not real. <br>
-            Director: Alien themself<br>
-            Actors: [many many]<br>
-            ID: 83748297ß5u3nröi31zuf8931<br>
+            <td>localhost:8080/movies/Blade<br>
+            </td>
+        </tr>
+        <tr>
+            <td>Get data about user</td>
+            <td>/users/:Username</td>
+            <td>GET</td>
+            <td>Returns a JSON data about a user</td>
+            <td>localhost:8080/users/leeno<br>
             </td>
         </tr>
         <tr>
@@ -46,8 +56,7 @@
             <td>/genres/:genre</td>
             <td>GET</td>
             <td>Returns a JSON data about a genre</td>
-            <td>"Name": "Action",
-                "Description": "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases."
+            <td>localhost:8080/genres/Action
                 <br>
             </td>
         </tr>
@@ -56,9 +65,7 @@
             <td>/director/:directorName</td>
             <td>GET</td>
             <td>Returns a JSON data about director.</td>
-            <td>Director: Alien themself<br>
-                Name: XYZ <br>
-                Bio: XYZ  was born in galaxy....<br>
+            <td>localhost:8080/director/Lana%20Wachowski<br>
                 </td>
         </tr>
         <tr>
@@ -66,34 +73,36 @@
             <td>/users</td> 
             <td>POST</td>
             <td>Will add new user to JSON object.</td>
-            <td>userName: xxxxx, <br>
-            password: xxxxxx, <br>
-            email: xxxxxx, <br>
-            Birthday: xx.xx.xxxx</td>
+            <td>localhost:8080/users<br>
+                Example inputs: <br>
+                UserName: xxxxx, <br>
+                Password: xxxxxx, <br>
+                Email: xxxxxx, <br>
+                Birthday: xx.xx.xxxx</td>
         </tr>
         <tr>
             <td>Add new movie to list of favorite</td>
             <td>/users/:Username/movies/:MovieID</td>
             <td>POST</td>
             <td>Returns a text confirming which movie was added successfully.</td>
-            <td>A text message indicating the title of the movie that was added</td>
+            <td>localhost:8080/users/leeno/movies/61e44b662fe00c3d6684946e</td>
         </tr>
         <tr>
             <td>Allow users to update their user information</td>
             <td>/users/:Username</td>
             <td>PUT</td>
             <td>Returns the data fields that was updated by the user.</td>
-            <td>userName: NewName, <br>
-            password: Newpassword, <br>
-            email: New email, <br>
-            Birthday: New birthday</td>
+            <td>localhost:8080/users/leeno<br>
+                Example inputs: <br>
+                Password: Newpassword <br>
+            </td>
         </tr>
         <tr>
             <td>Delete the user</td>
             <td>/users/:Username</td>
             <td>DELETE</td>
             <td>Return a text confirming that the user was deleted.</td>
-            <td>user2 was deleted</td>
+            <td>localhost:8080/users/leeno</td>
         </tr>
         
         <tr>
@@ -101,7 +110,7 @@
             <td>/users/:Username/movies/:MovieID</td>
             <td>DELETE</td>
             <td>Returns a text confirming which movie was removed successfully.</td>
-            <td>A text message indicating the title of the movie that was deleted</td>
+            <td>localhost:8080/users/leeno/movies/61e44b662fe00c3d6684946e </td>
         </tr>
     </table>
 

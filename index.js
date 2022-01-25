@@ -171,7 +171,15 @@ app.post('/users',
 });
 
 // App PUT update user by Username
-app.put('/users/:Username',passport.authenticate('jwt', {session:false}), (req, res) => {
+app.put('/users/:Username',passport.authenticate('jwt', {session:false}),
+[
+  check('Username', 'Username is required').isLength({ min: 5 }),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()
+],
+
+(req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
@@ -193,7 +201,7 @@ app.put('/users/:Username',passport.authenticate('jwt', {session:false}), (req, 
 
 
 // Add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:MovieID',(req, res) => {
+app.post('/users/:Username/movies/:MovieID',passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $push: { FavoriteMovies: req.params.MovieID }
    },
@@ -209,7 +217,7 @@ app.post('/users/:Username/movies/:MovieID',(req, res) => {
 });
 
 // DELETE a movie from a user's list of favorites
-app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+app.delete('/users/:Username/movies/:MovieID',passport.authenticate('jwt', { session: false }),  (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
      $pull: { FavoriteMovies: req.params.MovieID }
    },

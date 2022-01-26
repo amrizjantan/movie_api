@@ -56,9 +56,8 @@ const Directors = Models.Director;
 
 
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
 
- 
 //App GET
 app.get('/', (req, res) => {
   res.send('Hey welcome to myFlix, check out the movie list! ');

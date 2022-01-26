@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+
 const { check, validationResult } = require('express-validator');
 
 const Movies = Models.Movie;

@@ -1,30 +1,55 @@
+//Express Mongoose
+const express = require ('express');
+const morgan = require ('morgan');
 const mongoose = require('mongoose');
-const Models = require('./models.js');
-
 const { check, validationResult } = require('express-validator');
-
+const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-const express = require ('express');
-const morgan = require ('morgan');
-const uuid = require ('uuid');
+
 const bodyParser = require ('body-parser');
+
+//use CORS
+const cors = require('cors');
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+//use Auth.js
+let auth = require('./auth')(app);
+
+//use Passport
+const passport = require('passport');
+require('./passport');
+app.use(passport, initialize());
+
+const uuid = require ('uuid');
+
 const { title } = require('process');
 const app = express ();
+
+//morgan for logging
+app.use (morgan('common'));
+
+//express to return all static files in public folder
+app.use(express.static('public'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const cors = require('cors');
-app.use(cors());
-
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
-
-
 
 const res = require('express/lib/response');
+const { initialize } = require('passport');
 
 const Genres = Models.Genre;
 const Directors = Models.Director;
@@ -32,9 +57,6 @@ const Directors = Models.Director;
 
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-
-// morgan
-app.use (morgan('common'));
 
  
 //App GET
@@ -98,7 +120,7 @@ app.get('/users/:Username',passport.authenticate('jwt', {session:false}),(req, r
 });
 
 
-// GET data about a genre (description) by name/title 
+// GET data about a genre (description) 
 app.get("/genres/:genre",passport.authenticate('jwt', {session:false}), (req, res) => {
     Movies.findOne({ "Genre.Name": req.params.genre })
       .then((movie) => {
@@ -172,6 +194,7 @@ app.post('/users',
       });
   });
 
+
 // App PUT update user by Username
 app.put('/users/:Username',passport.authenticate('jwt', {session:false}),
 [
@@ -182,6 +205,14 @@ app.put('/users/:Username',passport.authenticate('jwt', {session:false}),
 ],
 
 (req, res) => {
+
+  // check the validation object for errors
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
     {
       Username: req.body.Username,
@@ -252,8 +283,6 @@ app.delete('/users/:Username',passport.authenticate('jwt', {session:false}), (re
 });
 
 
-  // static
-app.use(express.static('public'));
 
   // Error handler
 app.use((err, req, res, next) => {

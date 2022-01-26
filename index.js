@@ -17,10 +17,18 @@ app.use(cors());
 //use Auth.js
 let auth = require('./auth')(app);
 
+const res = require('express/lib/response');
+const { initialize } = require('passport');
+
+const Genres = Models.Genre;
+const Directors = Models.Director;
+
+
 //use Passport
 const passport = require('passport');
 require('./passport');
 app.use(passport, initialize());
+
 
 const uuid = require ('uuid');
 
@@ -37,11 +45,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-const res = require('express/lib/response');
-const { initialize } = require('passport');
-
-const Genres = Models.Genre;
-const Directors = Models.Director;
 
 
 // mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });

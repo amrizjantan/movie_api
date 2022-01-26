@@ -288,7 +288,6 @@ app.delete('/users/:Username',passport.authenticate('jwt', {session:false}), (re
 });
 
 
-
   // Error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);

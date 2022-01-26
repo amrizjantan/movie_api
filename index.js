@@ -1,5 +1,5 @@
 
-//Express Mongoose
+//Mongoose
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const { check, validationResult } = require('express-validator');
@@ -44,18 +44,13 @@ app.use(express.static('public'));
 //morgan for logging
 app.use (morgan('common'));
 
-const res = require('express/lib/response');
-const { initialize } = require('passport');
-
-const Genres = Models.Genre;
-const Directors = Models.Director;
-
-
 //use Passport
 const passport = require('passport');
 require('./passport');
-app.use(passport, initialize());
 
+
+const Genres = Models.Genre;
+const Directors = Models.Director;
 
 const uuid = require ('uuid');
 

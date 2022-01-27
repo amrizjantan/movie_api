@@ -91,7 +91,7 @@ app.get('/documentation', (req, res) => {
 //return json to get all users
   app.get('/users', passport.authenticate('jwt', {session:false}),(req, res) => {
     Users.find()
-      .then((users) => {
+      .then((UserData) => {
         res.status(201).json(userData);
       })
       .catch((err) => {

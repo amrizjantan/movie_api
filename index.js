@@ -57,11 +57,11 @@ const uuid = require ('uuid');
 const { title } = require('process');
 
 const userData = {
-  _id:User.ObjectId,
-  Username: User.Username,
-  Email: User.Email,
-  Birthday: User.Birthday,
-  FavoriteMovies : User.Birthday,
+  _id:Users.ObjectId,
+  Username: Users.Username,
+  Email: Users.Email,
+  Birthday: Users.Birthday,
+  FavoriteMovies : Users.Birthday,
 }
 
 

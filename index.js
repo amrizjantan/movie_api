@@ -67,7 +67,7 @@ const userData = {
 
 //App GET
 app.get('/', (req, res) => {
-  res.send('Hey welcome to myFlix, check out the movie list! ');
+  res.send('Heyhey welcome to myFlix, check out the movie list! ');
 });
 
 // documentation

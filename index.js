@@ -90,7 +90,8 @@ app.get('/documentation', (req, res) => {
 
 //return json to get all users
   app.get('/users', passport.authenticate('jwt', {session:false}),(req, res) => {
-    Users.find()
+    //Users.find()
+    userData.find()
       .then((userData) => {
         res.status(201).json(userData);
       })

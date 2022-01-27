@@ -116,8 +116,8 @@ app.get('/movies/:Title',passport.authenticate('jwt', {session:false}), (req, re
 // Get JSON user by username
 app.get('/users/:Username',passport.authenticate('jwt', {session:false}),(req, res) => {
   Users.findOne({ Username: req.params.Username })
-    .then((user) => {
-      res.json(user);
+    .then((userData) => {
+      res.json(userData);
     })
     .catch((err) => {
       console.error(err);

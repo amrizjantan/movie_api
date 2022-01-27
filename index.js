@@ -56,7 +56,13 @@ const uuid = require ('uuid');
 
 const { title } = require('process');
 
-
+const userData = {
+  _id:Users.ObjectId,
+  Username: Users.Username,
+  Email: Users.Email,
+  Birthday: Users.Birthday,
+  FavoriteMovies : Users.Birthday,
+}
 
 
 //App GET
@@ -86,7 +92,7 @@ app.get('/documentation', (req, res) => {
   app.get('/users', passport.authenticate('jwt', {session:false}),(req, res) => {
     Users.find()
       .then((users) => {
-        res.status(201).json(users);
+        res.status(201).json(userData);
       })
       .catch((err) => {
         console.error(err);

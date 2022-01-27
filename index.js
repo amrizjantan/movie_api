@@ -61,7 +61,7 @@ const userData = {
   Username: Users.Username,
   Email: Users.Email,
   Birthday: Users.Birthday,
-  FavoriteMovies : Users.Birthday,
+  FavoriteMovies : Movies.ObjectId
 }
 
 

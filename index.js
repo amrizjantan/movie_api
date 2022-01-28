@@ -84,13 +84,13 @@ app.get('/documentation', (req, res) => {
 // Get JSON all users
 app.get('/users',passport.authenticate('jwt', {session:false}),(req, res) => {
   Users.find()
-  .then((user) => {
+  .then((users) => {
   const userData = {
-  _id: user._Id,
-  Username: user.Username,
-  Email: user.Email,
-  Birthday: user.Birthday,
-  FavoriteMovies : user.FavoriteMovies
+  _id: users._Id,
+  Username: users.Username,
+  Email: users.Email,
+  Birthday: users.Birthday,
+  FavoriteMovies : users.FavoriteMovies
   }
   res.json(userData);
   })

@@ -56,14 +56,6 @@ const uuid = require ('uuid');
 
 const { title } = require('process');
 
-//const userData = {
- // _id:Users.ObjectId,
- // Username: Users.Username,
-  //Email: Users.Email,
-  //Birthday: Users.Birthday,
-  //FavoriteMovies : Movies.ObjectId
-//}
-
 
 //App GET
 app.get('/', (req, res) => {
@@ -88,24 +80,26 @@ app.get('/documentation', (req, res) => {
       });
   });
 
-//return json to get all users
-  app.get('/users', passport.authenticate('jwt', {session:false}),(req, res) => {
-    Users.find()
-    .then((user) => {
-      const userData = {
-      _id: user._Id,
-      Username: user.Username,
-      Email: user.Email,
-      Birthday: user.Birthday,
-      FavoriteMovies : user.FavoriteMovies
-      }
-      res.json(userData);
-      })
-      .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-      });
-      });
+
+// Get JSON all users
+app.get('/users',passport.authenticate('jwt', {session:false}),(req, res) => {
+  Users.find()
+  .then((user) => {
+  const userData = {
+  _id: user._Id,
+  Username: user.Username,
+  Email: user.Email,
+  Birthday: user.Birthday,
+  FavoriteMovies : user.FavoriteMovies
+  }
+  res.json(userData);
+  })
+  .catch((err) => {
+  console.error(err);
+  res.status(500).send('Error: ' + err);
+  });
+  });
+
 
 //Get JSON movie by Movietitle
 app.get('/movies/:Title',passport.authenticate('jwt', {session:false}), (req, res) => {
@@ -118,19 +112,6 @@ app.get('/movies/:Title',passport.authenticate('jwt', {session:false}), (req, re
       res.status(500).send('Error: ' + err);
     });
 });
-
-
-// Get JSON user by username
-//app.get('/users/:Username',passport.authenticate('jwt', {session:false}),(req, res) => {
-  //Users.findOne({ Username: req.params.Username })
-   // .then((userData) => {
-    //  res.json(userData);
-    //})
-    //.catch((err) => {
-     // console.error(err);
-    //  res.status(500).send('Error: ' + err);
-   // });
-//});
 
 
 // Get JSON user by username

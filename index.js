@@ -91,14 +91,21 @@ app.get('/documentation', (req, res) => {
 //return json to get all users
   app.get('/users', passport.authenticate('jwt', {session:false}),(req, res) => {
     Users.find()
-      .then((userData) => {
-        res.status(201).json(userData);
+    .then((user) => {
+      const userData = {
+      _id: user._Id,
+      Username: user.Username,
+      Email: user.Email,
+      Birthday: user.Birthday,
+      FavoriteMovies : user.FavoriteMovies
+      }
+      res.json(userData);
       })
       .catch((err) => {
-        console.error(err);
-        res.status(500).send('Error: ' + err);
+      console.error(err);
+      res.status(500).send('Error: ' + err);
       });
-  });
+      });
 
 //Get JSON movie by Movietitle
 app.get('/movies/:Title',passport.authenticate('jwt', {session:false}), (req, res) => {

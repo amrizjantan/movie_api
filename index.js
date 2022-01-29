@@ -85,14 +85,14 @@ app.get('/documentation', (req, res) => {
 app.get('/users',passport.authenticate('jwt', {session:false}),(req, res) => {
   Users.find()
   .then((users) => {
-  const userData = {
+  const userDatabank = {
   _id: users._Id,
   Username: users.Username,
   Email: users.Email,
   Birthday: users.Birthday,
   FavoriteMovies : users.FavoriteMovies
   }
-  res.json(userData);
+  res.json(userDatabank);
   })
   .catch((err) => {
   console.error(err);
@@ -119,14 +119,14 @@ app.get('/users/:Username',passport.authenticate('jwt', {session:false}),(req, r
   Users.findOne({ Username: req.params.Username })
   .then((user) => {
   const userData = {
-  _id: user._Id,
-  Username: user.Username,
-  Email: user.Email,
-  Birthday: user.Birthday,
-  FavoriteMovies : user.FavoriteMovies
-  }
-  res.json(userData);
-  })
+      _id: user._Id,
+      Username: user.Username,
+      Email: user.Email,
+      Birthday: user.Birthday,
+      FavoriteMovies : user.FavoriteMovies
+    }
+    res.json(userData);
+    })
   .catch((err) => {
   console.error(err);
   res.status(500).send('Error: ' + err);

@@ -84,21 +84,13 @@ app.get('/documentation', (req, res) => {
 // Get JSON all users
 app.get('/users',passport.authenticate('jwt', {session:false}),(req, res) => {
   Users.find()
-  .then((users) => {
-  const userDatabank = {
-  _id: users._Id,
-  Username: users.Username,
-  Email: users.Email,
-  Birthday: users.Birthday,
-  FavoriteMovies : users.FavoriteMovies
-  }
-  res.json(userDatabank);
-  })
-  .catch((err) => {
-  console.error(err);
-  res.status(500).send('Error: ' + err);
-  });
-  });
+        .then((users) => { res.status(201).json(users) })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).sent('Error' + err)
+        })
+});
+
 
 
 //Get JSON movie by Movietitle
@@ -114,23 +106,23 @@ app.get('/movies/:Title',passport.authenticate('jwt', {session:false}), (req, re
 });
 
 
-// Get JSON user by username
+// Get JSON user by username whitout Password
 app.get('/users/:Username',passport.authenticate('jwt', {session:false}),(req, res) => {
   Users.findOne({ Username: req.params.Username })
   .then((user) => {
-  const userData = {
-      _id: user._Id,
-      Username: user.Username,
-      Email: user.Email,
-      Birthday: user.Birthday,
-      FavoriteMovies : user.FavoriteMovies
+      const userData = {
+          _id: user._Id,
+          Username: user.Username,
+          Email: user.Email,
+          Birthday: user.Birthday,
+          FavoriteMovies : user.FavoriteMovies
     }
-    res.json(userData);
+      res.json(userData);
     })
   .catch((err) => {
-  console.error(err);
-  res.status(500).send('Error: ' + err);
-  });
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
   });
 
 // GET data about a genre (description) 

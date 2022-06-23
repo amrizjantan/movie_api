@@ -142,6 +142,15 @@ app.get(
 );
 
 // GET data about a director (bio, birth year, death year) by name
+// gets information about a director
+/**
+ * /directors end-point
+ * method: get
+ * director by name
+ * @param {express.request} req
+ * @param {express.response} res
+ */
+
 app.get(
   "/director/:directorName",
   passport.authenticate("jwt", { session: false }),
